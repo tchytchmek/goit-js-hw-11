@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sources":[],"sourcesContent":[],"names":[],"mappings":""}
+{"version":3,"file":"index.js","sources":["../src/main.js"],"sourcesContent":["const searchForm = document.querySelector('.form');\nconsole.log(searchForm);\n\n"],"names":["searchForm"],"mappings":"ssBAAA,MAAMA,EAAa,SAAS,cAAc,OAAO,EACjD,QAAQ,IAAIA,CAAU"}
