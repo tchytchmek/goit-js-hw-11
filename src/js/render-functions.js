@@ -1,15 +1,15 @@
-function createGallery(images){
+export function createGallery(images){
 
 }
 
-function clearGallery(){
+export function clearGallery(){
 
 }
 
-function showLoader(){
+export function showLoader(){
 
 }
 
-function hideLoader(){
+export function hideLoader(){
     
 }
