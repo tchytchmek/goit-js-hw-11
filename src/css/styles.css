@@ -2,7 +2,11 @@
     
     text-align: center;
   }
-
+  .load-wrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
 .gallery {
 display: flex;
 flex-wrap: wrap;
@@ -94,3 +98,7 @@ justify-content: center;
     transform: rotate(360deg);
   }
 } 
+
+.is-hidden {
+  display: none;
+}

@@ -1,4 +1,5 @@
 const gallery = document.querySelector('.gallery');
+const loader = document.querySelector('.loader');
 
 export function createGallery(images) {
   return images.map((el) => {
@@ -40,9 +41,8 @@ gallery.innerHTML = '';
 }
 
 export function showLoader(){
-gallery.innerHTML = '<div class="loader"></div>';
-}
+loader.classList.remove('is-hidden');}
 
 export function hideLoader(){
-gallery.innerHTML = '';
+loader.classList.add('is-hidden');
 }

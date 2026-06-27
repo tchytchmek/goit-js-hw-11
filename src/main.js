@@ -23,12 +23,14 @@ const lightbox = new SimpleLightbox('.gallery-item a', {
 
 function handleSearch(e){
     e.preventDefault();
-    clearGallery();
-    showLoader();
 
 const borys = new FormData(searchForm);
 const query = borys.get('search-text');
 
+
+
+clearGallery();
+showLoader();
 
 getImagesByQuery(query)
 .then(response => {
@@ -42,6 +44,7 @@ getImagesByQuery(query)
     message: 'Sorry, there are no images matching your search query. Please try again!',
     position: 'topRight'
 });
+return;
   }
 const markup = createGallery(recievedData);
 gallery.insertAdjacentHTML('afterbegin', markup);
