@@ -1,31 +1,30 @@
  // Імпорти
-import { createGallery , clearGallery , showLoader , hideLoader} from "./js/render-functions";
+import { clearGallery, hideLoader, renderGallery, showLoader } from "./js/render-functions";
 import { getImagesByQuery } from "./js/pixabay-api";
 
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
-
 // QuerySelectorи
-const searchForm = document.querySelector('.form');
-const gallery = document.querySelector('.gallery');
+const searchForm = document.querySelector(".form");
 
 //Обробники подій
-searchForm.addEventListener('submit' , handleSearch);
+searchForm.addEventListener("submit", handleSearch);
 
-const lightbox = new SimpleLightbox('.gallery-item a', {
-  captionsData: 'title', 
-  captionDelay: 250,     
-});
-
-
-function handleSearch(e){
+function handleSearch(e) {
     e.preventDefault();
 
 const borys = new FormData(searchForm);
-const query = borys.get('search-text');
+const query = borys.get("search-text").trim();
+
+if (!query) {
+    iziToast.error({
+        message: 'Please enter a search query.',
+        position: 'topRight',
+        color: 'red'
+    });
+    return;
+}
 
 
 
@@ -33,26 +32,28 @@ clearGallery();
 showLoader();
 
 getImagesByQuery(query)
-.then(response => {
-    hideLoader();
-    const recievedData = response.data.hits;
-
-
-    if(recievedData.length == 0){
-        iziToast.show({
-    color: 'red',
+.then(images => {
+    if(images.length === 0){
+        iziToast.error({
     message: 'Sorry, there are no images matching your search query. Please try again!',
-    position: 'topRight'
+    position: 'topRight',
+    color: 'red'
 });
 return;
   }
-const markup = createGallery(recievedData);
-gallery.insertAdjacentHTML('afterbegin', markup);
-lightbox.refresh();
+renderGallery(images);
 }
 )
 .catch(err => {
     console.log(err);
+    iziToast.error({
+        message: 'Something went wrong. Please try again later.',
+        position: 'topRight',
+        color: 'red'
+    });
 })
+.finally(() => {
+    hideLoader();
+});
 }
 
