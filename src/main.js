@@ -24,6 +24,7 @@ const lightbox = new SimpleLightbox('.gallery-item a', {
 function handleSearch(e){
     e.preventDefault();
     clearGallery();
+    showLoader();
 
 const borys = new FormData(searchForm);
 const query = borys.get('search-text');
