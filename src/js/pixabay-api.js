@@ -1,5 +1,7 @@
 import axios from "axios";
+import { showLoader } from "./render-functions";
 
 export function getImagesByQuery(query){
+  showLoader();
   return axios.get(`https://pixabay.com/api/?key=56434957-1ee9963b6aa14410bfffd2ce8&q=${query}&image_type=photo&orientation=horizontal&safesearch=true`);
 }
